@@ -1,0 +1,18 @@
+.filters {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  padding-left: calc(var(--base-grid-size) / 2);
+}
+
+.showFolders {
+  display: flex;
+  align-items: center;
+}
+
+.datePicker {
+  margin: 0 calc(var(--base-grid-size) * 2);
+  border: 1px solid var(--grey-300);
+}

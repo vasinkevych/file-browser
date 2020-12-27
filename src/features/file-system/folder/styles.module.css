@@ -1,0 +1,28 @@
+span {
+  padding-left: var(--base-grid-size);
+}
+
+.folder {
+  color: var(--grey-900);
+  line-height: calc(var(--base-grid-size) * 3);
+  padding-left: calc(var(--base-grid-size) * 2);
+}
+
+.selected {
+  background-color: var(--grey-600);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  padding: calc(var(--base-grid-size / 2)) 0;
+}
+
+.name:hover {
+  background-color: var(--grey-100);
+  cursor: pointer;
+}
+
+.selected:hover {
+  background-color: var(--grey-500);
+}

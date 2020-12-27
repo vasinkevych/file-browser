@@ -1,0 +1,31 @@
+.inlineCreate {
+  margin: var(--base-grid-size) 0;
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--grey-300);
+  width: auto;
+}
+
+.inlineCreate:focus-within {
+  border: 1px solid var(--grey-900);
+}
+
+input {
+  height: 24px;
+  margin-left: 2px;
+}
+
+input:focus,
+button:focus {
+  border: none;
+  outline: none;
+}
+
+button:active {
+  background-color: var(--grey-300);
+}
+
+button {
+  padding: 2px;
+  margin: 0 2px;
+}

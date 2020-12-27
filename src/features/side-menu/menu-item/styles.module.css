@@ -1,0 +1,20 @@
+.menuItem {
+  padding: var(--base-grid-size) calc(var(--base-grid-size) * 4.5);
+  line-height: calc(var(--base-grid-size) * 3);
+}
+
+.menuItem:hover {
+  background-color: var(--grey-100);
+  cursor: pointer;
+}
+
+.disabled {
+  padding: var(--base-grid-size) calc(var(--base-grid-size) * 4.5);
+  line-height: calc(var(--base-grid-size) * 3);
+  color: var(--grey-600);
+}
+
+.disabled:hover {
+  background-color: var(white);
+  color: var(--grey-600);
+}

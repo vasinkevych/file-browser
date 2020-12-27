@@ -1,0 +1,29 @@
+span {
+  padding-left: var(--base-grid-size);
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  color: var(--grey-900);
+  line-height: calc(var(--base-grid-size) * 3);
+  padding: 0 calc(var(--base-grid-size) * 2);
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  color: var(--grey-900);
+  line-height: calc(var(--base-grid-size) * 3);
+  padding: 0 calc(var(--base-grid-size) * 2);
+  background-color: var(--grey-600);
+}
+
+.file:hover {
+  background-color: var(--grey-100);
+  cursor: pointer;
+}
+
+.selected:hover {
+  background-color: var(--grey-500);
+}
