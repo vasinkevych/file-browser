@@ -2,9 +2,9 @@
 Implemented features:
 
 - breadcrumb with navigation
-- simple filters
+- simple filters by date, folders only
 - inline create/edit, delete
-- filters by date, folders only
+- file navigation section
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
