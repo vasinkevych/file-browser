@@ -12,7 +12,6 @@ export const Filters = (params) => {
   };
 
   const handleDateSelect = (e) => {
-    console.log(e);
     const dateUTC = e && e.getTime();
     action.filterByDate(dateUTC);
   };

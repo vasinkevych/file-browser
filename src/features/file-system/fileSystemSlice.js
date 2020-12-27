@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { v4 } from "uuid";
 import { filterMap } from "../../utils/utils";
 
@@ -11,7 +11,7 @@ import { INLINE_CREATE_ID } from "../../constants/app";
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-const structure = [
+const initalState = [
   {
     name: "src",
     type: "folder",
@@ -22,28 +22,28 @@ const structure = [
   {
     name: "index.html",
     type: "file",
-    updated: Date.now - oneDay * 2,
+    updated: Date.now() - oneDay * 2,
     parent: "root",
     id: 7,
   },
   {
     name: "applicationCache.js",
     type: "file",
-    updated: Date.now - oneDay * 5,
+    updated: Date.now() - oneDay * 5,
     parent: 1,
     id: 2,
   },
   {
     name: "features",
     type: "folder",
-    updated: Date.now - oneDay * 14,
+    updated: Date.now() - oneDay * 14,
     parent: 1,
     id: 3,
   },
   {
     name: "applicationCache.js",
     type: "file",
-    updated: Date.now - oneDay * 365,
+    updated: Date.now() - oneDay * 365,
     parent: 3,
     id: 4,
   },
@@ -58,7 +58,7 @@ const structure = [
 
 export const fileSystemSlice = createSlice({
   name: "navigator",
-  initialState: structure,
+  initialState: initalState,
 
   reducers: {
     startInline: (state, action) => {
@@ -97,8 +97,6 @@ export const {
   stopInline,
 } = fileSystemSlice.actions;
 
-export const getSelectedItem = (state) => state.navigator.selectedItem;
-
 export const buildTree = (arr, id = "root") => {
   return filterMap(
     [...arr].sort((a, b) => {
@@ -115,11 +113,38 @@ export const buildTree = (arr, id = "root") => {
   );
 };
 
-export const getFs = (state) => buildTree(state.navigator);
 export const getFlatFs = (state) => state.navigator;
-export const getInlineCreate = (state) =>
-  state.navigator.find((el) => el.id === INLINE_CREATE_ID);
-export const getItemById = (state, id) =>
-  state.navigator.fs.find((el) => el.id === id);
+
+export const getFsByIdPure = (items) =>
+  items.reduce((acc, curr) => ({ ...acc, [curr.id]: curr }), {});
+export const getFsById = createSelector(getFlatFs, getFsByIdPure);
+
+export const getFsTreePure = (navigator) => buildTree(navigator);
+export const getFsTree = createSelector(getFlatFs, getFsTreePure);
+
+export const getInlineCreatePure = (mapById) => mapById[INLINE_CREATE_ID];
+export const getInlineCreate = createSelector(getFsById, getInlineCreatePure);
+
+export const getAncestorsPure = (fsItems, fsItemsById, id) => {
+  const result = [];
+  const getParent = (id) => {
+    const el = fsItemsById[id];
+    if (id !== "root" && el && el.id !== "root" && el.parent) {
+      result.push(el);
+      getParent(el.parent);
+    }
+  };
+
+  if (!id) {
+    return result;
+  }
+
+  getParent(id);
+  return result.reverse();
+};
+export const getAncestors = (id) =>
+  createSelector(getFlatFs, getFsById, (fsItems, fsItemsById) =>
+    getAncestorsPure(fsItems, fsItemsById, id)
+  );
 
 export default fileSystemSlice.reducer;

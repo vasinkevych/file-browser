@@ -1,0 +1,3 @@
+.navTitle {
+  padding: calc(var(--base-grid-size) * 2) 0;
+}

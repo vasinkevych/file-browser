@@ -1,0 +1,12 @@
+.bcItem {
+  padding-left: var(--base-grid-size);
+  cursor: pointer;
+}
+
+.bcItem:hover {
+  font-weight: bold;
+}
+
+.bcItem span {
+  padding-left: calc(var(--base-grid-size) / 2);
+}

@@ -11,7 +11,11 @@ export function File({ file }) {
   const dispatch = useDispatch();
   const isSelected = selectedItem === id;
   const toggleFile = (e) => {
-    dispatch(selectItem(id));
+    if (isSelected) {
+      dispatch(selectItem(null));
+    } else {
+      dispatch(selectItem(id));
+    }
   };
 
   const fileExt =
