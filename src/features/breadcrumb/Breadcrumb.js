@@ -19,7 +19,7 @@ export const Breadcrumb = () => {
       {" "}
       <span className={styles.navItem}> Navigation: </span>
       {ancestors.map((el) => (
-        <BreadcrumbItem item={el} onClick={breadcrumbClickHandler} />
+        <BreadcrumbItem key={`${el.id}-breadcrumb`} item={el} onClick={breadcrumbClickHandler} />
       ))}
     </div>
   );

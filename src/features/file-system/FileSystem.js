@@ -6,6 +6,7 @@ import { create, stopInline } from "../../features/file-system/fileSystemSlice";
 import { InlineCreate } from "../../components/inline-create/InlineCreate";
 import { INLINE_CREATE_ID } from "../../constants/app";
 import { useFilters } from "../../hooks/useFilters";
+import { selectItem } from "../side-menu/sideMenuSlice";
 
 export function FileSystem({ structure, path }) {
   const [filterState] = useFilters();
@@ -15,10 +16,11 @@ export function FileSystem({ structure, path }) {
   const renderItem = (item, index) => {
     const { type, nested, id, updated } = item;
     const nextLevelPath = path ? [path, index] : [index];
+
     switch (type) {
       case "folder":
-        return (
-          showItem(updated) && (
+        if (showItem(updated)) {
+          return ((
             <Folder key={`${id}-folder`} folder={item}>
               <FileSystem
                 key={`${id}-fs`}
@@ -27,13 +29,21 @@ export function FileSystem({ structure, path }) {
               />
             </Folder>
           )
-        );
+          );
+        } else {
+          dispatch(selectItem(null));
+          return null;
+        }
 
       case "file":
-        return (
-          !filterState.showFolderOnly &&
-          showItem(updated) && <File key={id} file={item} />
-        );
+        if (showItem(updated) && !filterState.showFolderOnly) {
+          return (
+            <File key={id} file={item} />
+          );
+        } else {
+          dispatch(selectItem(null));
+          return null;
+        }
 
       case INLINE_CREATE_ID:
         const onSave = (payload) => {

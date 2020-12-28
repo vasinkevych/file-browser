@@ -5,6 +5,10 @@ Implemented features:
 - simple filters by date, folders only
 - inline create/edit, delete
 - file navigation section
+  
+not fixed edge cases:
+
+- deleting all children
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
